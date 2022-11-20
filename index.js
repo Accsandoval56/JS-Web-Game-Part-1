@@ -5,12 +5,6 @@ greenCharacter.style.left = "100px";
 greenCharacter.style.bottom = "100px";
 document.body.append(greenCharacter);
 
-let pineTree = document.createElement("img");
-pineTree.src = "assets/pine-tree.png";
-pineTree.style.position = "fixed";
-pineTree.style.left = "450px";
-pineTree.style.bottom = "200px";
-document.body.append(pineTree);
 
 function newImage(url, left, bottom) {
   let object = document.createElement("img");
@@ -24,17 +18,42 @@ function newImage(url, left, bottom) {
 
 function newItem(url, left, bottom) {
   let object = newImage(url, left, bottom);
-
   object.addEventListener("dblclick", () => {
     object.remove();
   });
 }
 
-newImage("assets/green-character.gif", 100, 100);
-newImage("assets/tree.png", 250, 350);
-newImage("assets/pillar.png", 750, 200);
-newImage("assets/pine-tree.png", 650, 450);
-newImage("assets/crate.png", 250, 200);
-newImage("assets/well.png", 500, 425);
+const tile = function (url, left, bottom, width, height) {
+  for (let h = 0; h < height; h++) {
+    for (let w = 0; w < width; w++) {
+      newImage(url, left + w * 100, bottom + h * 100);
+    }
+  }
+};
+
+
+let horizon = window.innerHeight / 2.5;
+let heightOfSky = window.innerHeight - horizon;
+let heightOfGrass = horizon; 
+
+tile("assets/sky.png", 0, horizon, window.innerWidth / 100, heightOfSky / 100);
+tile("assets/grass.png", 0, 0, window.innerWidth / 100, heightOfGrass / 100);
+
 newItem("assets/sword.png", 130, 120);
 newItem("assets/staff.png", 600, 100);
+
+newImage("assets/green-character.gif", 100, 100);
+newImage("assets/tree.png", 250, 450);
+newImage("assets/pillar.png", 750, 200);
+newImage("assets/pillar.png", 750, 500);
+newImage("assets/pine-tree.png", 700, 450);
+newImage("assets/crate.png", 250, 200);
+newImage("assets/well.png", 500, 425);
+
+let pineTree = document.createElement("img");
+pineTree.src = "assets/pine-tree.png";
+pineTree.style.position = "fixed";
+pineTree.style.left = "450px";
+pineTree.style.bottom = "200px";
+document.body.append(pineTree);
+
